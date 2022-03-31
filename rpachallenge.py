@@ -15,13 +15,20 @@ try:
     dirname = os.path.abspath('.')
     inputExcelFile =  os.path.join(dirname,'challenge.xlsx')
     outputSS = os.path.join(dirname,'result.png')
+    chromedriver = os.path.join(dirname,'chromedriver.exe')
 
     df = pd.read_excel(inputExcelFile,'Sheet1')
 
     options = Options()
     options.add_argument("start-maximized")
     options.headless = True
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+    try:
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+    except Exception as e:
+        driver = webdriver.Chrome(chromedriver, options=options)
+
     driver.get('https://www.rpachallenge.com/')
 
     startBtn = driver.find_element(By.XPATH,'.//*[@class="waves-effect col s12 m12 l12 btn-large uiColorButton"]')

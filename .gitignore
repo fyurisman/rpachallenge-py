@@ -4,3 +4,4 @@ build
 dist
 result.png
 rpachallenge.spec
+chromedriver.exe
